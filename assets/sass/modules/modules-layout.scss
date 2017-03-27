@@ -1,0 +1,36 @@
+@import "_imports";
+
+.modulesArea {
+	.Module {
+		margin-top: 1em;
+	}
+	.Module__link {
+		padding: .327em 0;
+	}
+	.Module__listItem {
+		margin: 0;
+	}
+}
+@media all and (min-width: $medium) {
+	.modulesArea {
+		.modulesArea__row--twocols {
+			overflow: hidden;
+		}
+		.Module--halfWidth {
+			width: 50%;
+			float: left;
+		}
+		.Module {
+			margin-top: 0;
+		}
+		.modulesArea__row {
+			padding: 1% 0;
+		}
+		.Module.Module--mainContent:nth-child(2n+1) {
+			padding-right: .5em;
+		}
+		.Module.Module--mainContent:nth-child(2n+2) {
+			padding-left: .5em;
+		}
+	}
+}

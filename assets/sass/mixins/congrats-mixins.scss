@@ -1,0 +1,157 @@
+@mixin whiteLinkWithShadow() {
+	color: #fff;
+	font-weight: 300;
+	text-shadow: 0 1px 1px rgba(0,0,0,.4);
+}
+@mixin addFadeout($element, $color, $gradientHeight, $edge) {
+	#{$element} {
+		position: relative;
+	}
+	#{$element}:before {
+		content: "";
+		position: absolute;
+		z-index: 6;
+		@if $edge == "top" {
+			height: $gradientHeight;
+			width: 100%;
+			top: -$gradientHeight;
+			left: 0;
+			background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, $color 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,$color)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,$color 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,$color 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,$color 100%); /* IE10+ */
+			background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,$color 100%); /* W3C */
+		}
+		@if $edge == "right" {
+			top: 0;
+			height: 100%;
+			width: $gradientHeight;
+			right: -$gradientHeight;
+
+			background: -moz-linear-gradient(left,  rgba$color 0%, rgba(0,0,0,0) 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%,$color), color-stop(100%,rgba(0,0,0,0))); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(left,  $color 0%,rgba(0,0,0,0) 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(left,  $color 0%,rgba(0,0,0,0) 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(left,  $color 0%,rgba(0,0,0,0) 100%); /* IE10+ */
+			background: linear-gradient(to right,  $color 0%,rgba(0,0,0,0) 100%); /* W3C */
+		}
+	}
+}
+
+/*	Drop this into any text that's assigned a background.
+	 -	IF THE BACKGROUND IS A GRADIENT: Gradients are complex because they have
+	 	a lot of code. If this is the case, specify the background gradient
+	 	outside the mixin, and don't include the image parameter.
+	 -	IF THE BACKGROUND IS AN IMAGE: Include this as a parameter.
+*/
+
+@mixin textImageMask($fallbackColor, $backgroundImage:null) {
+
+	/*	If there's no background image, we don't want to
+		write the background-image-hiding code, since this
+		will hide whatever we're using for a background
+		(probably a gradient) as well.	*/
+		
+	@if $backgroundImage != null {
+		/*	http://stackoverflow.com/questions/17224530/moz-background-clip-text-in-mozilla-update */
+		background: -webkit-linear-gradient(transparent, transparent), url($backgroundImage) transparent;
+		background-image: -o-linear-gradient(transparent, transparent);
+		background-size: contain;
+	}
+
+	color: $fallbackColor;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	/*	Only IE8 and below sees this */
+	background\9: none;
+}
+
+
+
+
+
+@mixin nav() {	
+	@media all and (min-width: $medium) {
+
+
+		/*	Nav
+			--- */
+
+		.u-NavSite__level--1 > li {
+			border: none;
+		}
+		.u-NavSite__level--1 > .u-NavSite__itemContainer > .u-NavSite__item {
+			color: $level1navItem__color;
+			font-weight: 300;
+		}
+		.u-NavSite__level--1 > .u-NavSite__itemContainer.u-NavSite__item--isOpen > .u-NavSite__item {
+			color: $level1navItem_open__color;
+		}
+		.u-NavSite__level--1 > .u-NavSite__itemContainer > .u-NavSite__item.u-NavSite__item--isCurrent {
+			color: $level1navItem_current__color;
+			background: $level1navItem_current__background;
+		}
+		.u-NavSite__level--2 .u-NavSite__item.u-NavSite__item--isCurrent {
+			background: $level2navItem_current__background;
+		}
+		.u-NavSite__level--1 li:hover .u-NavSite__level--2 {
+			background: $level2nav_hover__background;
+			border: 1px solid $level2nav_hover__borderColor;
+			@if $level1hasDropShadow == true {
+				-moz-box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.3);
+				-webkit-box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.3);
+				box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.3);
+			}
+		}
+		.u-NavSite__level--1>.u-NavSite__itemContainer:hover>.u-NavSite__item {
+			background: $level1navItem_hover__background;
+		}
+		.u-NavSite__level--1 > .u-NavSite__itemContainer.u-NavSite__item--isOpen:hover > .u-NavSite__item,
+		.u-NavSite__level--1 > .u-NavSite__itemContainer.u-NavSite__item--isOpen > .u-NavSite__item:hover, 
+		.u-NavSite__level--1 > .u-NavSite__itemContainer.u-NavSite__item--isOpen:hover .u-NavSite__level--2 {
+			background: $level1navItem_current__background;
+			-moz-box-shadow: none;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+			border: none;
+		}
+		.u-NavSite__level--1 .u-NavSite__item--isOpen > .u-NavSite__level--2 {
+			border: none;
+			background: $level2nav__background;
+		}
+		.u-NavSite__level--2 .u-NavSite__item:hover {
+			background: #eee;
+		}
+		.u-NavSite__level--2 .u-NavSite__item {
+			color: $level2navItem__color;
+		}
+		.u-NavSite__item--isOpen .u-NavSite__level--2 {
+			background: transparent;
+			border: 1px solid white;
+		}
+		.u-NavSite__level--2 .u-NavSite__item:hover {
+			background: $level2navItem_hover__background;
+		}
+		.u-NavSite__level--1 > .u-NavSite__item--isOpen {
+			background: #fff;
+		}
+
+
+		/*	Reply
+			----- */
+		.u-NavSite__item[href="https://apply.vassar.edu/status"] {
+			font-weight: bold;
+			background: $replyCard__background;
+			color: $replyCard__color;
+		}
+		.u-NavSite__item[href="https://apply.vassar.edu/status"]:hover {
+			background: $replyCard_hover__background;
+			color: $replyCard_hover__color;
+		}
+	}
+}
+
+
+
+
