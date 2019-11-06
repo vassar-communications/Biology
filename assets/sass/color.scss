@@ -5,14 +5,51 @@ body {
 	border-radius: .5em;
 	-moz-border-radius: .5em;
 	-webkit-border-radius: .5em;
-	background: #ffffff url(../images/circle.svg) 2em 2em no-repeat;
+	background: #fff url(../images/circle.svg) 2em 2em no-repeat;
 }
+
+.gf- body
+{
+    border-radius: 0;
+    background-image: none;
+    margin-top: 0;
+}
+
+.gf- .PageContent
+{
+	border-radius: .5em;
+	-moz-border-radius: .5em;
+	-webkit-border-radius: .5em;
+	background: #fff url(../images/circle.svg) 2em 2em no-repeat;
+    background-size: 52%;
+}
+
+.gf- .u-Masthead__siteName
+{
+    margin-top: 0;
+}
+
 @media all and (min-width: $medium) {
 	body {
-		background: #ffffff url(../images/circle.svg) 2em 2em no-repeat;
+		//background: #ffffff url(../images/circle.svg) 2em 2em no-repeat;
 		background-size: 52%;
+        background-color: #ccdeac;
 	}
+
+    .gf- .PageContent
+    {
+        margin: 2%;
+    }
 }
+
+@media all and (min-width: 79em)
+{
+    .gf- .PageContent
+    {
+        margin: 2% auto;
+    }
+}
+
 .u-lHeader {
 	border-top-left-radius: .5em;
 	border-top-right-radius: .5em;
